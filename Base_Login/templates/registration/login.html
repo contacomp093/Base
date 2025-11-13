@@ -1,56 +1,207 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
-    <!-- Bootstrap 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<html lang="es" class="h-full transition-colors duration-700">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión</title>
+
+    <!-- Tailwind compilado -->
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+
+    <!-- Estilos personalizados -->
     <style>
-        body {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+      /* 🌈 Fondo animado degradado (más contraste y movimiento normal) */
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
         }
-        .login-card {
-            background-color: #fff;
-            border-radius: 1rem;
-            box-shadow: 0 0 20px rgba(0,0,0,0.15);
-            padding: 2rem;
-            width: 100%;
-            max-width: 380px;
+        50% {
+          background-position: 100% 50%;
         }
-        .login-card h3 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #333;
+        100% {
+          background-position: 0% 50%;
         }
+      }
+
+      /* Claro */
+      body {
+        background: linear-gradient(-45deg, #4ade80, #22d3ee, #60a5fa, #a78bfa);
+        background-size: 300% 300%;
+        animation: gradientMove 12s ease infinite;
+      }
+
+      /* Oscuro */
+      body.dark {
+        background: linear-gradient(-45deg, #0f172a, #155e75, #1e3a8a, #6d28d9);
+        background-size: 300% 300%;
+        animation: gradientMove 18s ease infinite;
+      }
+
+      /* 💫 Aparición inicial natural */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
     </style>
-</head>
-<body>
+  </head>
 
-<div class="login-card">
-    <h3>Iniciar sesión</h3>
-    <form method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="id_username" class="form-label">Usuario</label>
-            {{ form.username }}
-        </div>
-        <div class="mb-3">
-            <label for="id_password" class="form-label">Contraseña</label>
-            {{ form.password }}
-        </div>
-        {% if form.errors %}
-            <div class="alert alert-danger">Usuario o contraseña incorrectos.</div>
-        {% endif %}
-        <button type="submit" class="btn btn-primary w-100">Entrar</button>
-    </form>
-</div>
+  <body
+    class="h-full text-gray-800 dark:text-gray-100 transition-colors duration-700"
+  >
+    <div
+      class="flex flex-col items-center justify-center h-screen p-4 fade-in relative"
+    >
+      <!-- 🌙 Botón de cambio de tema -->
+      <button
+        id="theme-toggle"
+        class="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 hover:bg-gray-200 dark:hover:bg-gray-700 shadow-md backdrop-blur-md transition-all duration-500 transform hover:scale-105"
+        aria-label="Cambiar tema"
+      >
+        <!-- ☀️ Sol -->
+        <svg
+          id="icon-sun"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 text-yellow-400 hidden transition-transform duration-500 scale-0"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m15.364 6.364-1.06-1.06M7.757 7.757 6.697 6.697m10.607 0-1.06 1.06M7.757 16.243l-1.06 1.06M12 8.25a3.75 3.75 0 1 1 0 7.5a3.75 3.75 0 0 1 0-7.5z"
+          />
+        </svg>
+        <!-- 🌙 Luna -->
+        <svg
+          id="icon-moon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 text-indigo-400 transition-transform duration-500 scale-100"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 12.79A9 9 0 1 1 11.21 3a7.5 7.5 0 0 0 9.79 9.79z"
+          />
+        </svg>
+      </button>
 
-</body>
+      <!-- 🪟 Tarjeta del login -->
+      <div
+        class="w-full max-w-md bg-white/40 dark:bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/30 dark:border-gray-700/40 transition-all duration-700 fade-in"
+      >
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold mb-2">
+            Bienvenido de nuevo <span class="inline-block">👋</span>
+          </h1>
+          <p class="text-gray-600 dark:text-gray-300">
+            Inicia sesión para continuar
+          </p>
+        </div>
+
+        <form method="post" class="space-y-5">
+          {% csrf_token %}
+          <div>
+            <label class="block mb-1 text-gray-700 dark:text-gray-200"
+              >Usuario</label
+            >
+            <input
+              type="text"
+              name="username"
+              required
+              class="w-full px-4 py-2 rounded-lg bg-white/70 dark:bg-gray-700/80 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-400 text-gray-800 dark:text-gray-100 outline-none transition-all duration-700"
+            />
+          </div>
+
+          <div>
+            <label class="block mb-1 text-gray-700 dark:text-gray-200"
+              >Contraseña</label
+            >
+            <input
+              type="password"
+              name="password"
+              required
+              class="w-full px-4 py-2 rounded-lg bg-white/70 dark:bg-gray-700/80 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-400 text-gray-800 dark:text-gray-100 outline-none transition-all duration-700"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition-transform duration-700 hover:scale-[1.02]"
+          >
+            Iniciar Sesión
+          </button>
+        </form>
+
+        <div class="mt-6 text-center">
+          <a
+            href="{% url 'password_reset' %}"
+            class="text-indigo-600 dark:text-indigo-400 hover:underline transition-all duration-700"
+          >
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🌓 Script cambio de tema -->
+    <script>
+      const themeToggle = document.getElementById("theme-toggle");
+      const html = document.documentElement;
+      const body = document.body;
+      const iconSun = document.getElementById("icon-sun");
+      const iconMoon = document.getElementById("icon-moon");
+
+      const userPrefDark =
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+      if (userPrefDark) {
+        html.classList.add("dark");
+        body.classList.add("dark");
+        iconMoon.classList.add("hidden");
+        iconSun.classList.remove("hidden");
+        iconSun.classList.replace("scale-0", "scale-100");
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const isDark = html.classList.toggle("dark");
+        body.classList.toggle("dark");
+        localStorage.theme = isDark ? "dark" : "light";
+
+        if (isDark) {
+          iconMoon.classList.replace("scale-100", "scale-0");
+          setTimeout(() => {
+            iconMoon.classList.add("hidden");
+            iconSun.classList.remove("hidden");
+            iconSun.classList.replace("scale-0", "scale-100");
+          }, 200);
+        } else {
+          iconSun.classList.replace("scale-100", "scale-0");
+          setTimeout(() => {
+            iconSun.classList.add("hidden");
+            iconMoon.classList.remove("hidden");
+            iconMoon.classList.replace("scale-0", "scale-100");
+          }, 200);
+        }
+      });
+    </script>
+  </body>
 </html>

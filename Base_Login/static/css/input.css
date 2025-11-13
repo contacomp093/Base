@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    @apply bg-gray-100 text-gray-800 transition-colors duration-500;
+  }
+
+  html.dark {
+    @apply bg-gray-900 text-gray-100 transition-colors duration-500;
+  }
+}
