@@ -12,9 +12,15 @@
     <!-- 🎨 Estilos personalizados -->
     <style>
       @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       /* 🌤️ Tema claro (más definido) */
@@ -37,8 +43,14 @@
 
       /* ✨ Aparición inicial */
       @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px) scale(0.97); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
       }
 
       .fade-in {
@@ -54,11 +66,13 @@
         color: #f8fafc;
       }
 
-      p, label {
+      p,
+      label {
         color: #334155;
         transition: color 0.7s ease-in-out;
       }
-      body.dark p, body.dark label {
+      body.dark p,
+      body.dark label {
         color: #cbd5e1;
       }
 
@@ -72,29 +86,57 @@
     </style>
   </head>
 
-  <body class="h-full text-gray-800 dark:text-gray-100 transition-colors duration-700">
-    <div class="flex flex-col items-center justify-center h-screen p-4 fade-in relative">
-      
+  <body
+    class="h-full text-gray-800 dark:text-gray-100 transition-colors duration-700"
+  >
+    <div
+      class="flex flex-col items-center justify-center h-screen p-4 fade-in relative"
+    >
       <!-- 🌙 Botón de cambio de tema -->
-      <button id="theme-toggle"
-        class="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 hover:bg-gray-200 dark:hover:bg-gray-700 shadow-md backdrop-blur-md transition-all duration-500 transform hover:scale-105"
-        aria-label="Cambiar tema">
-        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-          stroke-width="1.5" stroke="currentColor"
-          class="w-6 h-6 text-yellow-400 hidden transition-transform duration-500 scale-0">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m15.364 6.364-1.06-1.06M7.757 7.757 6.697 6.697m10.607 0-1.06 1.06M7.757 16.243l-1.06 1.06M12 8.25a3.75 3.75 0 1 1 0 7.5a3.75 3.75 0 0 1 0-7.5z" />
+      <button
+        id="theme-toggle"
+        class="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full border border-gray-400 dark:border-gray-600 bg-white/90 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-800 shadow-2xl backdrop-blur-md transition-all duration-500 transform hover:scale-110"
+        aria-label="Cambiar tema"
+      >
+        <!-- ☀️ Sol -->
+        <svg
+          id="icon-sun"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-7 h-7 text-yellow-400 dark:text-yellow-300 drop-shadow-[0_0_10px_rgba(255,215,0,0.9)] hidden transition-transform duration-500 scale-0"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m15.364 6.364-1.06-1.06M7.757 7.757 6.697 6.697m10.607 0-1.06 1.06M7.757 16.243l-1.06 1.06M12 8.25a3.75 3.75 0 1 1 0 7.5a3.75 3.75 0 0 1 0-7.5z"
+          />
         </svg>
-        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-          stroke-width="1.5" stroke="currentColor"
-          class="w-6 h-6 text-indigo-400 transition-transform duration-500 scale-100">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M21 12.79A9 9 0 1 1 11.21 3a7.5 7.5 0 0 0 9.79 9.79z" />
+
+        <!-- 🌙 Luna -->
+        <svg
+          id="icon-moon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-7 h-7 text-indigo-300 dark:text-indigo-200 drop-shadow-[0_0_12px_rgba(99,102,241,1)] transition-transform duration-500 scale-100"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 12.79A9 9 0 1 1 11.21 3a7.5 7.5 0 0 0 9.79 9.79z"
+          />
         </svg>
       </button>
 
       <!-- 🪟 Tarjeta de login -->
-      <div class="w-full max-w-md bg-white/40 dark:bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/30 dark:border-gray-700/40 transition-all duration-700 fade-in">
+      <div
+        class="w-full max-w-md bg-white/40 dark:bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/30 dark:border-gray-700/40 transition-all duration-700 fade-in"
+      >
         <div class="text-center mb-8">
           <h1 class="text-3xl font-bold mb-2">Bienvenido de nuevo 👋</h1>
           <p>Inicia sesión para continuar</p>
@@ -104,24 +146,37 @@
           {% csrf_token %}
           <div>
             <label class="block mb-1">Usuario</label>
-            <input type="text" name="username" required
-              class="w-full px-4 py-2 rounded-lg bg-white/70 dark:bg-gray-700/80 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-400 text-gray-800 dark:text-gray-100 outline-none transition-all duration-700">
+            <input
+              type="text"
+              name="username"
+              required
+              class="w-full px-4 py-2 rounded-lg bg-white/70 dark:bg-gray-700/80 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-400 text-gray-800 dark:text-gray-100 outline-none transition-all duration-700"
+            />
           </div>
 
           <div>
             <label class="block mb-1">Contraseña</label>
-            <input type="password" name="password" required
-              class="w-full px-4 py-2 rounded-lg bg-white/70 dark:bg-gray-700/80 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-400 text-gray-800 dark:text-gray-100 outline-none transition-all duration-700">
+            <input
+              type="password"
+              name="password"
+              required
+              class="w-full px-4 py-2 rounded-lg bg-white/70 dark:bg-gray-700/80 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-400 text-gray-800 dark:text-gray-100 outline-none transition-all duration-700"
+            />
           </div>
 
-          <button type="submit"
-            class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition-transform duration-700 hover:scale-[1.02]">
+          <button
+            type="submit"
+            class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition-transform duration-700 hover:scale-[1.02]"
+          >
             Iniciar Sesión
           </button>
         </form>
 
         <div class="mt-6 text-center">
-          <a href="{% url 'password_reset' %}" class="hover:underline transition-all duration-700">
+          <a
+            href="{% url 'password_reset' %}"
+            class="hover:underline transition-all duration-700"
+          >
             ¿Olvidaste tu contraseña?
           </a>
         </div>
