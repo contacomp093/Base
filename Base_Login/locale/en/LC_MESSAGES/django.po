@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-15 22:50-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\core\settings.py:117
+msgid "Español"
+msgstr ""
+
+#: .\core\settings.py:118
+msgid "English"
+msgstr ""
+
+#: .\templates\registration\login.html:8
+#: .\templates\registration\login.html:164
+msgid "Iniciar Sesión"
+msgstr "Log In"
+
+#: .\templates\registration\login.html:94
+msgid "Cambiar tema"
+msgstr "Toggle theme"
+
+#: .\templates\registration\login.html:134
+msgid "Bienvenido de nuevo"
+msgstr "Welcome back"
+
+#: .\templates\registration\login.html:135
+msgid "Inicia sesión para continuar"
+msgstr "Log in to continue"
+
+#: .\templates\registration\login.html:141
+msgid "Usuario"
+msgstr "Username"
+
+#: .\templates\registration\login.html:151
+msgid "Contraseña"
+msgstr "Password"
+
+#: .\templates\registration\login.html:170
+msgid "¿Olvidaste tu contraseña?"
+msgstr "Forgot your password?"

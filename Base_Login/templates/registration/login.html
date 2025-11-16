@@ -1,10 +1,11 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="es" class="h-full transition-colors duration-700">
+<html lang="{{ LANGUAGE_CODE }}" class="h-full transition-colors duration-700">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iniciar Sesión</title>
+    <title>{% trans "Iniciar Sesión" %}</title>
 
     <!-- Tailwind compilado -->
     <link rel="stylesheet" href="{% static 'css/output.css' %}" />
@@ -40,7 +41,6 @@
         color: #e2e8f0;
       }
 
-      /* ✨ Aparición inicial */
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -56,7 +56,6 @@
         animation: fadeIn 0.6s ease-out forwards;
       }
 
-      /* 📘 Contraste en textos */
       h1 {
         color: #0f172a;
         transition: color 0.7s ease-in-out;
@@ -85,17 +84,14 @@
     </style>
   </head>
 
-  <body
-    class="h-full text-gray-800 dark:text-gray-100 transition-colors duration-700"
-  >
-    <div
-      class="flex flex-col items-center justify-center h-screen p-4 fade-in relative"
-    >
+  <body class="h-full text-gray-800 dark:text-gray-100 transition-colors duration-700">
+    <div class="flex flex-col items-center justify-center h-screen p-4 fade-in relative">
+
       <!-- 🌙 Botón de cambio de tema -->
       <button
         id="theme-toggle"
         class="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full border border-gray-400 dark:border-gray-600 bg-white/90 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-800 shadow-2xl backdrop-blur-md transition-all duration-500 transform hover:scale-110"
-        aria-label="Cambiar tema"
+        aria-label="{% trans 'Cambiar tema' %}"
       >
         <!-- ☀️ Sol -->
         <svg
@@ -133,18 +129,16 @@
       </button>
 
       <!-- 🪟 Tarjeta del login -->
-      <div
-        class="w-full max-w-md bg-white/40 dark:bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/30 dark:border-gray-700/40 transition-all duration-700 fade-in"
-      >
+      <div class="w-full max-w-md bg-white/40 dark:bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/30 dark:border-gray-700/40 transition-all duration-700 fade-in">
         <div class="text-center mb-8">
-          <h1 class="text-3xl font-bold mb-2">Bienvenido de nuevo 👋</h1>
-          <p>Inicia sesión para continuar</p>
+          <h1 class="text-3xl font-bold mb-2">{% trans "Bienvenido de nuevo" %} 👋</h1>
+          <p>{% trans "Inicia sesión para continuar" %}</p>
         </div>
 
         <form method="post" class="space-y-5">
           {% csrf_token %}
           <div>
-            <label class="block mb-1">Usuario</label>
+            <label class="block mb-1">{% trans "Usuario" %}</label>
             <input
               type="text"
               name="username"
@@ -154,7 +148,7 @@
           </div>
 
           <div>
-            <label class="block mb-1">Contraseña</label>
+            <label class="block mb-1">{% trans "Contraseña" %}</label>
             <input
               type="password"
               name="password"
@@ -167,16 +161,13 @@
             type="submit"
             class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition-transform duration-700 hover:scale-[1.02]"
           >
-            Iniciar Sesión
+            {% trans "Iniciar Sesión" %}
           </button>
         </form>
 
         <div class="mt-6 text-center">
-          <a
-            href="{% url 'password_reset' %}"
-            class="hover:underline transition-all duration-700"
-          >
-            ¿Olvidaste tu contraseña?
+          <a href="{% url 'password_reset' %}" class="hover:underline transition-all duration-700">
+            {% trans "¿Olvidaste tu contraseña?" %}
           </a>
         </div>
       </div>
