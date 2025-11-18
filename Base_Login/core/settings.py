@@ -138,5 +138,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # LOGIN / LOGOUT
 # --------------------------------------------
 
-LOGIN_REDIRECT_URL = '/admin/'
+LOGIN_REDIRECT_URL = "/dashboard/"
 LOGOUT_REDIRECT_URL = '/accounts/login/'
