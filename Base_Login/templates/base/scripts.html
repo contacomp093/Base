@@ -1,0 +1,58 @@
+<script>
+  // Perfil dropdown
+  document.getElementById("profile-toggle").onclick = () =>
+    document.getElementById("profile-menu").classList.toggle("hidden");
+
+  // Sidebar
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuClose = document.getElementById("menu-close");
+
+  menuToggle.onclick = () => {
+    sidebar.classList.toggle("-translate-x-full");
+    overlay.classList.toggle("hidden");
+  };
+
+  menuClose.onclick = () => {
+    sidebar.classList.add("-translate-x-full");
+    overlay.classList.add("hidden");
+  };
+
+  overlay.onclick = () => {
+    sidebar.classList.add("-translate-x-full");
+    overlay.classList.add("hidden");
+  };
+
+  // Tema
+  const themeToggle = document.getElementById("theme-toggle");
+  const html = document.documentElement;
+  const body = document.body;
+  const iconSun = document.getElementById("icon-sun");
+  const iconMoon = document.getElementById("icon-moon");
+
+  const userPrefDark =
+    localStorage.theme === "dark" ||
+    (!("theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  function syncIcons(isDark) {
+    iconMoon.classList.toggle("hidden", isDark);
+    iconSun.classList.toggle("hidden", !isDark);
+  }
+
+  if (userPrefDark) {
+    html.classList.add("dark");
+    body.classList.add("dark");
+    syncIcons(true);
+  } else {
+    syncIcons(false);
+  }
+
+  themeToggle.addEventListener("click", () => {
+    const isDark = html.classList.toggle("dark");
+    body.classList.toggle("dark");
+    localStorage.theme = isDark ? "dark" : "light";
+    syncIcons(isDark);
+  });
+</script>

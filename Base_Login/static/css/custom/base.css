@@ -1,0 +1,52 @@
+/* -----------------------------------------------------------
+   BASE DEL SISTEMA (Tipografías + resets + colores iniciales)
+----------------------------------------------------------- */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.7s ease, color 0.7s ease;
+}
+
+/* Colores de texto base */
+body {
+    color: #1f2937; /* gris oscuro elegante */
+}
+
+body.dark {
+    color: #f1f5f9; /* gris muy claro para modo oscuro */
+}
+
+/* Títulos */
+h1, h2, h3, h4 {
+    color: #0f172a !important;
+    transition: color 0.7s ease-in-out;
+}
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4 {
+    color: #f8fafc !important;
+}
+
+/* Texto general */
+p, label, span {
+    color: #334155 !important;
+    transition: color 0.7s ease-in-out;
+}
+body.dark p,
+body.dark label,
+body.dark span {
+    color: #cbd5e1 !important;
+}
+
+/* Links */
+a {
+    color: #4f46e5 !important;
+    transition: color 0.7s ease-in-out;
+}
+body.dark a {
+    color: #818cf8 !important;
+}
