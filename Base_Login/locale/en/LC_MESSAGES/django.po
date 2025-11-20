@@ -7,49 +7,223 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-15 22:50-0600\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2025-11-19 18:09-0600\n"
+"PO-Revision-Date: 2025-11-19 22:00-0600\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language-Team: English <LL@li.org>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\core\settings.py:117
-msgid "Español"
+#: .\accounts\forms.py:19
+#, fuzzy
+#| msgid "Tu nombre completo"
+msgid "Nombre completo"
+msgstr "Your full name"
+
+#: .\accounts\forms.py:20
+#, fuzzy
+#| msgid "Número telefónico"
+msgid "Correo electrónico"
+msgstr "Phone number"
+
+#: .\accounts\forms.py:21
+msgid "Teléfono"
+msgstr ""
+
+#: .\accounts\forms.py:22
+msgid "Ciudad"
+msgstr ""
+
+#: .\accounts\forms.py:23
+#, fuzzy
+#| msgid "Nombre de tu tienda o negocio"
+msgid "Nombre de la tienda"
+msgstr "Name of your store or business"
+
+#: .\accounts\forms.py:24
+msgid "Mensaje (opcional)"
 msgstr ""
 
 #: .\core\settings.py:118
+msgid "Español"
+msgstr "Spanish"
+
+#: .\core\settings.py:119
 msgid "English"
+msgstr "English"
+
+# -----------------------------
+#  Affiliate Apply (Proveedor)
+# -----------------------------
+#: .\templates\accounts\affiliate_apply.html:5
+#: .\templates\accounts\affiliate_apply.html:11
+msgid "Afiliar mi tienda"
+msgstr "Affiliate my store"
+
+#: .\templates\accounts\affiliate_apply.html:12
+msgid ""
+"Completa este formulario y te enviaremos instrucciones para crear tu cuenta "
+"de proveedor."
+msgstr ""
+"Complete this form and we will send you instructions to create your provider "
+"account."
+
+#: .\templates\accounts\affiliate_apply.html:20
+msgid "Tu nombre completo"
+msgstr "Your full name"
+
+#: .\templates\accounts\affiliate_apply.html:25
+msgid "Tu correo electrónico"
+msgstr "Your email address"
+
+#: .\templates\accounts\affiliate_apply.html:33
+msgid "Número telefónico"
+msgstr "Phone number"
+
+#: .\templates\accounts\affiliate_apply.html:38
+msgid "Ciudad o región"
+msgstr "City or region"
+
+#: .\templates\accounts\affiliate_apply.html:44
+msgid "Nombre de tu tienda o negocio"
+msgstr "Name of your store or business"
+
+#: .\templates\accounts\affiliate_apply.html:49
+msgid "Describe brevemente tu negocio y los servicios que ofreces"
+msgstr "Briefly describe your business and the services you offer"
+
+#: .\templates\accounts\affiliate_apply.html:52
+msgid "Enviar solicitud"
+msgstr "Submit application"
+
+#: .\templates\accounts\affiliate_thanks.html:4
+msgid "Gracias"
 msgstr ""
 
-#: .\templates\registration\login.html:8
-#: .\templates\registration\login.html:164
+#: .\templates\accounts\affiliate_thanks.html:9
+msgid "Solicitud recibida"
+msgstr ""
+
+#: .\templates\accounts\affiliate_thanks.html:10
+msgid ""
+"Gracias — revisaremos tu solicitud y te enviaremos por correo los pasos para "
+"registrar tu tienda."
+msgstr ""
+
+#: .\templates\accounts\affiliate_thanks.html:11
+msgid "Volver al inicio"
+msgstr ""
+
+#: .\templates\accounts\provider_register.html:4
+msgid "Registro de Proveedor"
+msgstr ""
+
+#: .\templates\accounts\provider_register.html:9
+msgid "Completa el registro de tu tienda"
+msgstr ""
+
+#: .\templates\accounts\provider_register.html:10
+msgid "Registramos una solicitud a nombre de:"
+msgstr ""
+
+#: .\templates\accounts\provider_register.html:22
+msgid "Crear cuenta y mi tienda"
+msgstr ""
+
+#: .\templates\base\base.html:8 .\templates\base\navbar.html:15
+#: .\templates\base\sidebar.html:20 .\templates\dashboard\index.html:4
+msgid "Dashboard"
+msgstr ""
+
+#: .\templates\base\navbar.html:16 .\templates\base\sidebar.html:23
+#: .\templates\dashboard\index.html:12
+#, fuzzy
+#| msgid "Usuario"
+msgid "Usuarios"
+msgstr "Username"
+
+#: .\templates\base\navbar.html:17 .\templates\base\sidebar.html:26
+msgid "Reportes"
+msgstr ""
+
+#: .\templates\base\navbar.html:40
+msgid "Mi Cuenta"
+msgstr ""
+
+#: .\templates\base\navbar.html:46
+msgid "Perfil"
+msgstr ""
+
+#: .\templates\base\navbar.html:47
+msgid "Ajustes"
+msgstr ""
+
+#: .\templates\base\navbar.html:48
+#, fuzzy
+#| msgid "Iniciar Sesión"
+msgid "Cerrar sesión"
+msgstr "Log In"
+
+#: .\templates\base\sidebar.html:16
+msgid "Menú"
+msgstr ""
+
+#: .\templates\base\sidebar.html:29
+msgid "Configuración"
+msgstr ""
+
+#: .\templates\dashboard\index.html:8
+#, fuzzy
+#| msgid "Bienvenido de nuevo"
+msgid "Bienvenido al Dashboard"
+msgstr "Welcome back"
+
+#: .\templates\dashboard\index.html:13
+msgid "Total registrados:"
+msgstr ""
+
+#: .\templates\dashboard\index.html:17
+msgid "Sesiones activas"
+msgstr ""
+
+#: .\templates\dashboard\index.html:18
+msgid "Hoy:"
+msgstr ""
+
+#: .\templates\dashboard\index.html:22
+msgid "Notificaciones"
+msgstr ""
+
+#: .\templates\dashboard\index.html:23
+msgid "Nuevas:"
+msgstr ""
+
+#: .\templates\registration\login.html:4 .\templates\registration\login.html:37
 msgid "Iniciar Sesión"
 msgstr "Log In"
 
-#: .\templates\registration\login.html:94
-msgid "Cambiar tema"
-msgstr "Toggle theme"
-
-#: .\templates\registration\login.html:134
+#: .\templates\registration\login.html:15
 msgid "Bienvenido de nuevo"
 msgstr "Welcome back"
 
-#: .\templates\registration\login.html:135
+#: .\templates\registration\login.html:17
 msgid "Inicia sesión para continuar"
 msgstr "Log in to continue"
 
-#: .\templates\registration\login.html:141
+#: .\templates\registration\login.html:25
 msgid "Usuario"
 msgstr "Username"
 
-#: .\templates\registration\login.html:151
+#: .\templates\registration\login.html:31
 msgid "Contraseña"
 msgstr "Password"
 
-#: .\templates\registration\login.html:170
+#: .\templates\registration\login.html:44
 msgid "¿Olvidaste tu contraseña?"
 msgstr "Forgot your password?"
+
+#~ msgid "Cambiar tema"
+#~ msgstr "Toggle theme"

@@ -1,0 +1,26 @@
+{% extends "base_public/public_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Registro de Proveedor" %}{% endblock %}
+
+{% block content %}
+<div class="public-bg h-screen flex items-center justify-center p-4 fade-in">
+  <div class="w-full max-w-lg card-translucent rounded-2xl shadow-2xl p-8">
+    <h1 class="text-2xl font-bold mb-3">{% trans "Completa el registro de tu tienda" %}</h1>
+    <p class="mb-4">{% trans "Registramos una solicitud a nombre de:" %} {{ application.contact_email }}</p>
+
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      {% for field in form %}
+        <div>
+          {{ field.label_tag }}<br>
+          {{ field }}<br>
+          {{ field.errors }}
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="btn-primary w-full">{% trans "Crear cuenta y mi tienda" %}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

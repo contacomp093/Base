@@ -1,171 +1,266 @@
-{% load static %}
-{% load i18n %}
+{% load static %} {% load i18n %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}" class="h-full transition-colors duration-700">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>{% block title %}{% endblock %}</title>
 
     <!-- Tailwind compilado -->
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
 
     <style>
-        /******************************
+      /******************************
          *  🎨 ANIMACIÓN DE GRADIENTE
          ******************************/
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
         }
-
-        body {
-            background: linear-gradient(-45deg, #22c55e, #38bdf8, #3b82f6, #8b5cf6);
-            background-size: 300% 300%;
-            animation: gradientMove 14s ease infinite;
-            color: #1f2937;
-            transition: color 0.7s ease-in-out;
+        50% {
+          background-position: 100% 50%;
         }
-
-        body.dark {
-            background: linear-gradient(-45deg, #020617, #0f172a, #1e3a8a, #5b21b6);
-            background-size: 300% 300%;
-            animation: gradientMove 18s ease infinite;
-            color: #f3f4f6;
+        100% {
+          background-position: 0% 50%;
         }
+      }
 
-        /******************************
+      body {
+        background: linear-gradient(-45deg, #22c55e, #38bdf8, #3b82f6, #8b5cf6);
+        background-size: 300% 300%;
+        animation: gradientMove 14s ease infinite;
+        color: #1f2937;
+        transition: color 0.7s ease-in-out;
+      }
+
+      body.dark {
+        background: linear-gradient(-45deg, #020617, #0f172a, #1e3a8a, #5b21b6);
+        background-size: 300% 300%;
+        animation: gradientMove 18s ease infinite;
+        color: #f3f4f6;
+      }
+
+      /******************************
          *  🔥 COLORES LOGIN
          ******************************/
-        h1, h2, h3, h4 {
-            color: #0f172a !important;
-            transition: color 0.7s;
-        }
-        body.dark h1, body.dark h2, body.dark h3, body.dark h4 {
-            color: #f8fafc !important;
-        }
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #0f172a !important;
+        transition: color 0.7s;
+      }
+      body.dark h1,
+      body.dark h2,
+      body.dark h3,
+      body.dark h4 {
+        color: #f8fafc !important;
+      }
 
-        p, label {
-            color: #334155 !important;
-            transition: color 0.7s;
-        }
-        body.dark p, body.dark label {
-            color: #cbd5e1 !important;
-        }
+      p,
+      label {
+        color: #334155 !important;
+        transition: color 0.7s;
+      }
+      body.dark p,
+      body.dark label {
+        color: #cbd5e1 !important;
+      }
 
-        a {
-            color: #4f46e5 !important;
-            transition: color 0.7s;
-        }
-        body.dark a {
-            color: #818cf8 !important;
-        }
+      a {
+        color: #4f46e5 !important;
+        transition: color 0.7s;
+      }
+      body.dark a {
+        color: #818cf8 !important;
+      }
 
-        /******************************
+      /******************************
          *  🔥 GLASSMORPHISM
          ******************************/
-        .card-translucent {
-            background-color: rgba(255,255,255,0.40) !important;
-            border: 1px solid rgba(255,255,255,0.30) !important;
-            backdrop-filter: blur(20px) !important;
-            transition: background 0.7s, border-color 0.7s;
-        }
-        body.dark .card-translucent {
-            background-color: rgba(31,41,55,0.50) !important;
-            border-color: rgba(55,65,81,0.40) !important;
-        }
+      .card-translucent {
+        background-color: rgba(255, 255, 255, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        backdrop-filter: blur(20px) !important;
+        transition: background 0.7s, border-color 0.7s;
+      }
+      body.dark .card-translucent {
+        background-color: rgba(31, 41, 55, 0.5) !important;
+        border-color: rgba(55, 65, 81, 0.4) !important;
+      }
 
-        /******************************
+      /******************************
          *  🌟 INPUTS GLOBAL
          ******************************/
-        .input-field {
-            width: 100%;
-            padding: 0.70rem 1rem;
-            height: 2.75rem;
-            border-radius: 0.75rem;
-            border: 1px solid #d1d5db;
-            background-color: rgba(255,255,255,0.75);
-            color: #1f2937;
-            font-size: 1rem;
-            transition: all 0.25s ease;
-        }
+      .input-field {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        height: 2.75rem;
+        border-radius: 0.75rem;
+        border: 1px solid #d1d5db;
+        background-color: rgba(255, 255, 255, 0.75);
+        color: #1f2937;
+        font-size: 1rem;
+        transition: all 0.25s ease;
+      }
 
-        body.dark .input-field {
-            background-color: rgba(55,65,81,0.80);
-            border-color: #4b5563;
-            color: #f3f4f6;
-        }
+      body.dark .input-field {
+        background-color: rgba(55, 65, 81, 0.8);
+        border-color: #4b5563;
+        color: #f3f4f6;
+      }
 
-        .input-field:focus {
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.35);
-        }
+      .input-field:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+      }
 
-        /******************************
+      /******************************
          *  🌟 BOTÓN PRIMARIO GLOBAL
          ******************************/
-        .btn-primary {
-            width: 100%;
-            padding: 0.70rem 1rem;
-            height: 2.85rem;
-            border-radius: 0.75rem;
-            font-size: 1rem;
-            font-weight: 500;
+      .btn-primary {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        height: 2.85rem;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 500;
 
-            background-color: #4f46e5 !important;
-            color: white !important;
+        background-color: #4f46e5 !important;
+        color: white !important;
 
-            transition: background-color 0.3s, transform 0.25s, box-shadow 0.25s;
-        }
-        .btn-primary:hover {
-            background-color: #4338ca !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(79,70,229,0.40);
-        }
-        .btn-primary:active {
-            transform: scale(0.97);
-        }
+        transition: background-color 0.3s, transform 0.25s, box-shadow 0.25s;
+      }
+      .btn-primary:hover {
+        background-color: #4338ca !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(79, 70, 229, 0.4);
+      }
+      .btn-primary:active {
+        transform: scale(0.97);
+      }
 
-        /******************************
+      /******************************
          *  ✨ ANIMACIÓN DE ENTRADA
          ******************************/
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.97); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.97);
         }
-        .fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
         }
+      }
+      .fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+      /******************************
+         *  🌟 LABELS GLOBAL
+         ******************************/
+      .label-primary {
+        color: #334155 !important;
+        font-weight: 500;
+      }
+      body.dark .label-primary {
+        color: #cbd5e1 !important;
+      }
+
+      /******************************
+         *  🌟 INPUTS GLOBAL NUEVOS
+         *  (NO sustituyen tus .input-field)
+         ******************************/
+      .input-primary {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid #d1d5db;
+        background-color: rgba(255, 255, 255, 0.75);
+        color: #1f2937;
+        transition: all 0.25s ease;
+      }
+
+      body.dark .input-primary {
+        background-color: rgba(55, 65, 81, 0.8);
+        border-color: #4b5563;
+        color: #f3f4f6;
+      }
+
+      .input-primary:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+      }
+      /******************************
+        *  🌟 TEXTAREA ESTILO UNIFICADO
+        ******************************/
+      textarea.input-primary {
+        height: auto !important;
+        min-height: 130px;
+        padding: 1rem 1.1rem; /* un poco más cómodo */
+        resize: vertical;
+      }
+
+      /* Placeholder claro */
+      textarea.input-primary::placeholder {
+        color: #9ca3af;
+        opacity: 1;
+      }
+
+      /* Placeholder en oscuro */
+      body.dark input-primary::placeholder {
+        color: #f3f4f6;
+;
+      }
     </style>
 
     {% block extra_css %}{% endblock %}
-</head>
+  </head>
 
-<body class="h-full">
-
+  <body class="h-full">
     <!-- 🌓 Botón de tema -->
     <button
-        id="theme-toggle"
-        class="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full border border-gray-400 dark:border-gray-600 bg-white/90 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-800 shadow-2xl backdrop-blur-md transition-all duration-500 transform hover:scale-110 z-50"
+      id="theme-toggle"
+      class="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full border border-gray-400 dark:border-gray-600 bg-white/90 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-800 shadow-2xl backdrop-blur-md transition-all duration-500 transform hover:scale-110 z-50"
     >
-        <svg id="icon-sun" class="theme-icon w-7 h-7 text-yellow-400 hidden" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 
+      <svg
+        id="icon-sun"
+        class="theme-icon w-7 h-7 text-yellow-400 hidden"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 
                    12H3m15.364 6.364-1.06-1.06M7.757 
                    7.757 6.697 6.697m10.607 0-1.06 
                    1.06M7.757 16.243l-1.06 1.06M12 
                    8.25a3.75 3.75 0 1 1 0 
-                   7.5 3.75 3.75 0 0 1 0-7.5z"/>
-        </svg>
+                   7.5 3.75 3.75 0 0 1 0-7.5z"
+        />
+      </svg>
 
-        <svg id="icon-moon" class="theme-icon w-7 h-7 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 12.79A9 9 0 1 1 11.21 
-                   3a7.5 7.5 0  0 0 9.79 9.79z"/>
-        </svg>
+      <svg
+        id="icon-moon"
+        class="theme-icon w-7 h-7 text-indigo-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 12.79A9 9 0 1 1 11.21 
+                   3a7.5 7.5 0  0 0 9.79 9.79z"
+        />
+      </svg>
     </button>
 
     <!-- CONTENIDO -->
@@ -173,38 +268,38 @@
 
     <!-- 🌓 Script tema -->
     <script>
-        const themeToggle = document.getElementById("theme-toggle");
-        const html = document.documentElement;
-        const body = document.body;
-        const iconSun = document.getElementById("icon-sun");
-        const iconMoon = document.getElementById("icon-moon");
+      const themeToggle = document.getElementById("theme-toggle");
+      const html = document.documentElement;
+      const body = document.body;
+      const iconSun = document.getElementById("icon-sun");
+      const iconMoon = document.getElementById("icon-moon");
 
-        const userPrefDark =
-            localStorage.theme === "dark" ||
-            (!("theme" in localStorage) &&
-             window.matchMedia("(prefers-color-scheme: dark)").matches);
+      const userPrefDark =
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-        function syncIcons(isDark) {
-            iconMoon.classList.toggle("hidden", isDark);
-            iconSun.classList.toggle("hidden", !isDark);
-        }
+      function syncIcons(isDark) {
+        iconMoon.classList.toggle("hidden", isDark);
+        iconSun.classList.toggle("hidden", !isDark);
+      }
 
-        if (userPrefDark) {
-            html.classList.add("dark");
-            body.classList.add("dark");
-            syncIcons(true);
-        } else {
-            syncIcons(false);
-        }
+      if (userPrefDark) {
+        html.classList.add("dark");
+        body.classList.add("dark");
+        syncIcons(true);
+      } else {
+        syncIcons(false);
+      }
 
-        themeToggle.addEventListener("click", () => {
-            const isDark = html.classList.toggle("dark");
-            body.classList.toggle("dark");
-            localStorage.theme = isDark ? "dark" : "light";
-            syncIcons(isDark);
-        });
+      themeToggle.addEventListener("click", () => {
+        const isDark = html.classList.toggle("dark");
+        body.classList.toggle("dark");
+        localStorage.theme = isDark ? "dark" : "light";
+        syncIcons(isDark);
+      });
     </script>
 
     {% block extra_js %}{% endblock %}
-</body>
+  </body>
 </html>

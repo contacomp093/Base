@@ -1,0 +1,13 @@
+Hola {{ application.contact_name }},
+
+Recibimos tu solicitud de afiliación a {{ company_name }}.
+
+Completa tu registro aquí:
+{{ register_url }}
+
+Detalles:
+Correo: {{ application.contact_email }}
+Tienda: {{ application.store_name }}
+Ciudad: {{ application.city }}
+
+Si no solicitaste esto, ignora este mensaje.
