@@ -143,10 +143,14 @@ LOGIN_REDIRECT_URL = "/dashboard/"
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "tu_gmail@gmail.com"
-EMAIL_HOST_PASSWORD = "TU_PASS_O_APP_PASSWORD"
-DEFAULT_FROM_EMAIL = "Mi Plataforma <tu_gmail@gmail.com>"
+EMAIL_HOST_USER = "contacomp093@gmail.com"
+EMAIL_HOST_PASSWORD = "wcax huzv tuqc dkaz"
+DEFAULT_FROM_EMAIL = "Sistema de citas <contacomp093@gmail.com>"
+
+# Dominio base para enlaces en correos (PRODUCCIÓN)
+DEFAULT_DOMAIN = "https://base-40xl.onrender.com"

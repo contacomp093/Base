@@ -46,6 +46,8 @@ class ProviderApplication(models.Model):
 
     expires_at = models.DateTimeField(default=default_expiry)
     is_used = models.BooleanField(default=False)
+    registered_at = models.DateTimeField(null=True, blank=True)
+
 
     # -----------------------------
     # Métodos
@@ -55,3 +57,10 @@ class ProviderApplication(models.Model):
 
     def __str__(self):
         return f"{self.store_name} ({self.contact_email})"
+
+    def mark_registered(self):
+        self.status = 'approved'
+        self.is_used = True
+        self.registered_at = timezone.now()
+        self.save()
+
