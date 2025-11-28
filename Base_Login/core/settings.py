@@ -5,6 +5,14 @@ Django settings for core project.
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+from dotenv import load_dotenv
+
+# --------------------------------------------
+# CARGAR VARIABLES DESDE .env
+# --------------------------------------------
+
+# Carga archivo .env ubicado en la raíz del proyecto
+load_dotenv()
 
 # --------------------------------------------
 # BASE
@@ -12,9 +20,12 @@ from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-7a*h6*4x3j5u@s=2^bhvi3-a!g6@ecnu+tu-86ds549i&&4ln4'
-DEBUG = True
-ALLOWED_HOSTS = ['*']
+# SECRET_KEY Y DEBUG vienen desde el .env
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-key-no-usar-en-produccion")
+
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+
+ALLOWED_HOSTS = ["*"]
 
 
 # --------------------------------------------
@@ -28,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'accounts',
     'dashboard',
 ]
@@ -42,7 +54,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',  # ← IMPORTANTE PARA TRADUCCIONES
+    'django.middleware.locale.LocaleMiddleware',
 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -105,13 +117,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # --------------------------------------------
-# INTERNACIONALIZACIÓN (CORREGIDO)
+# INTERNACIONALIZACIÓN
 # --------------------------------------------
 
-LANGUAGE_CODE = 'es'   # idioma por defecto
+LANGUAGE_CODE = 'es'
 
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = [
@@ -119,11 +130,9 @@ LANGUAGES = [
     ('en', _('English')),
 ]
 
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
-]
+LOCALE_PATHS = [BASE_DIR / 'locale']
 
-LANGUAGE_COOKIE_NAME = 'django_language'  # ← SIN ESTO NO CAMBIA
+LANGUAGE_COOKIE_NAME = 'django_language'
 
 
 # --------------------------------------------
@@ -140,18 +149,28 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # --------------------------------------------
 
 LOGIN_REDIRECT_URL = "/dashboard/"
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 
+# ============================================
+# SENDGRID - Email API
+# ============================================
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "contacomp093@gmail.com"
-EMAIL_HOST_PASSWORD = "wcax huzv tuqc dkaz"
-DEFAULT_FROM_EMAIL = "Sistema de citas <contacomp093@gmail.com>"
 
-# Dominio base para enlaces en correos (PRODUCCIÓN)
-DEFAULT_DOMAIN = "https://base-40xl.onrender.com"
-EMAIL_TIMEOUT = 10
+EMAIL_HOST_USER = "apikey"  # literal, no se cambia
+EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_API_KEY")
+
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "contacomp093@gmail.com")
+
+# ============================================
+# DOMINIO BASE PARA EMAILS
+# ============================================
+
+DEFAULT_DOMAIN = os.getenv(
+    "DEFAULT_DOMAIN",
+    "http://127.0.0.1:8000" if DEBUG else "https://base-40xl.onrender.com"
+)
