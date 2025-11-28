@@ -154,3 +154,4 @@ DEFAULT_FROM_EMAIL = "Sistema de citas <contacomp093@gmail.com>"
 
 # Dominio base para enlaces en correos (PRODUCCIÓN)
 DEFAULT_DOMAIN = "https://base-40xl.onrender.com"
+EMAIL_TIMEOUT = 10

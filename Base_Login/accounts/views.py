@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
+from threading import Thread
 
 from .forms import ProviderApplicationForm
 from .models import ProviderApplication
@@ -25,7 +26,7 @@ def affiliate_apply(request):
             # Preparar URL de registro (token)
             token = application.token
             register_path = reverse("accounts:provider_register", args=[str(token)])
-            register_url = request.build_absolute_uri(register_path)
+            register_url = f"{settings.DEFAULT_DOMAIN}{register_path}"
 
             # Enviar email premium al solicitante (HTML) y copia a admin de pruebas
             send_provider_application_emails(application, register_url)
@@ -41,28 +42,37 @@ def affiliate_thanks(request):
 
 # Helper para enviar emails
 def send_provider_application_emails(application: ProviderApplication, register_url: str):
-    subject = "Solicitud recibida — Afiliación a MyPanel"
-    from_email = settings.DEFAULT_FROM_EMAIL
-    to_email = [application.contact_email]
-    # copia a pruebas
-    cc = [ "contacomp093@gmail.com" ]  # correo de pruebas
+    """
+    Envía el correo en un hilo aparte para evitar bloqueos en Render.
+    """
 
-    # HTML para el proveedor (premium)
-    html_content = render_to_string("accounts/emails/provider_application_email.html", {
-        "application": application,
-        "register_url": register_url,
-        "company_name": getattr(settings, "PROJECT_NAME", "Mi Plataforma"),
-    })
+    def _send():
+        subject = "Solicitud recibida — Afiliación a MyPanel"
+        from_email = settings.DEFAULT_FROM_EMAIL
+        to_email = [application.contact_email]
 
-    text_content = render_to_string("accounts/emails/provider_application_email.txt", {
-        "application": application,
-        "register_url": register_url,
-        "company_name": getattr(settings, "PROJECT_NAME", "Mi Plataforma"),
-    })
+        # copia a pruebas
+        cc = ["contacomp093@gmail.com"]
 
-    msg = EmailMultiAlternatives(subject, text_content, from_email, to_email, cc=cc)
-    msg.attach_alternative(html_content, "text/html")
-    msg.send(fail_silently=False)
+        # HTML para el proveedor (premium)
+        html_content = render_to_string("accounts/emails/provider_application_email.html", {
+            "application": application,
+            "register_url": register_url,
+            "company_name": getattr(settings, "PROJECT_NAME", "Mi Plataforma"),
+        })
+
+        text_content = render_to_string("accounts/emails/provider_application_email.txt", {
+            "application": application,
+            "register_url": register_url,
+            "company_name": getattr(settings, "PROJECT_NAME", "Mi Plataforma"),
+        })
+
+        msg = EmailMultiAlternatives(subject, text_content, from_email, to_email, cc=cc)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send(fail_silently=False)
+
+    # Ejecutar envío sin bloquear la vista
+    Thread(target=_send).start()
 
 # 3) Registro real del proveedor (token links)
 from django import forms
