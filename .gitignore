@@ -22,3 +22,4 @@ Base_Login/dashboard/migrations/__pycache__/__init__.cpython-314.pyc
 /Base_Login/core/__pycache__
 *.pyc
 *.pyc
+Base_Login/.env
