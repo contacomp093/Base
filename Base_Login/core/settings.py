@@ -153,18 +153,23 @@ LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 
 # ============================================
-# SENDGRID - Email API
+# SENDGRID - Email API (Recommended for Render)
 # ============================================
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.sendgrid.net"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# Backend que usa la API HTTP de SendGrid (NO SMTP)
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 
-EMAIL_HOST_USER = "apikey"  # literal, no se cambia
-EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_API_KEY")
+# Tu API Key (se lee desde variables de entorno)
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "contacomp093@gmail.com")
+# Debe estar desactivado para que envíe correos reales
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
+# Remitente verificado en SendGrid (Single Sender)
+DEFAULT_FROM_EMAIL = "contacomp093@gmail.com"
+
+# Dominio para enlaces en correos
+DEFAULT_DOMAIN = "https://base-40xl.onrender.com"
 
 # ============================================
 # DOMINIO BASE PARA EMAILS
