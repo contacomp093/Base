@@ -9,6 +9,8 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
 from threading import Thread
+from django.http import JsonResponse
+from django.core.mail import send_mail
 
 from .forms import ProviderApplicationForm
 from .models import ProviderApplication
@@ -133,3 +135,24 @@ def provider_register(request, token):
         "form": form,
         "application": application,
     })
+
+def email_diagnostic(request):
+    data = {
+        "SENDGRID_API_KEY_set": settings.SENDGRID_API_KEY is not None,
+        "EMAIL_BACKEND": settings.EMAIL_BACKEND,
+        "DEFAULT_FROM_EMAIL": settings.DEFAULT_FROM_EMAIL,
+    }
+
+    try:
+        send_mail(
+            "TEST DIAGNOSTICO SENDGRID",
+            "Este es un correo de prueba enviado desde Render.",
+            settings.DEFAULT_FROM_EMAIL,
+            ["contacomp093@gmail.com"],
+            fail_silently=False
+        )
+        data["send_mail_result"] = "Email enviado (o aceptado por Django)"
+    except Exception as e:
+        data["send_mail_result"] = f"ERROR: {str(e)}"
+
+    return JsonResponse(data)
