@@ -1,0 +1,42 @@
+/* -----------------------------------------------------------
+   LAYOUTS (estructuras)
+----------------------------------------------------------- */
+
+/* ----- Fondo público con gradiente animado (Login, ForgotPassword, etc.) ----- */
+
+.public-bg {
+    background: linear-gradient(-45deg, #22c55e, #38bdf8, #3b82f6, #8b5cf6);
+    background-size: 300% 300%;
+    animation: gradientMove 14s ease infinite;
+}
+
+body.dark .public-bg {
+    background: linear-gradient(-45deg, #020617, #0f172a, #1e3a8a, #5b21b6);
+    background-size: 300% 300%;
+    animation: gradientMove 18s ease infinite;
+}
+
+
+/* ----- Fondo interno del Dashboard ----- */
+
+.dashboard-bg {
+    background: linear-gradient(
+        135deg,
+        #86efac 0%,
+        #38bdf8 15%,
+        #3b82f6 55%,
+        #818cf8 85%,
+        #c084fc 100%
+    );
+}
+
+body.dark .dashboard-bg {
+    background: linear-gradient(
+        135deg,
+        #020617 0%,
+        #0f172a 15%,
+        #1e3a8a 55%,
+        #3730a3 80%,
+        #5b21b6 100%
+    );
+}
