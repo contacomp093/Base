@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 from django.conf.urls.i18n import i18n_patterns
-from accounts.views import email_diagnostic
 
 
 urlpatterns = [
