@@ -1,26 +1,56 @@
 {% extends "base_public/public_base.html" %}
 {% load i18n %}
+{% load form_filters %}
 
 {% block title %}{% trans "Registro de Proveedor" %}{% endblock %}
 
 {% block content %}
 <div class="public-bg h-screen flex items-center justify-center p-4 fade-in">
-  <div class="w-full max-w-lg card-translucent rounded-2xl shadow-2xl p-8">
-    <h1 class="text-2xl font-bold mb-3">{% trans "Completa el registro de tu tienda" %}</h1>
-    <p class="mb-4">{% trans "Registramos una solicitud a nombre de:" %} {{ application.contact_email }}</p>
+  <div class="w-full max-w-2xl card-translucent rounded-2xl shadow-2xl p-8">
+
+    <h1 class="text-2xl font-bold mb-3 text-center">
+      {% trans "Completa el registro de tu tienda" %}
+    </h1>
+
+    <p class="mb-6 text-center">
+      {% trans "Registramos una solicitud a nombre de:" %}
+      <span class="font-semibold">{{ application.contact_email }}</span>
+    </p>
 
     <form method="post" class="space-y-4">
       {% csrf_token %}
-      {% for field in form %}
-        <div>
-          {{ field.label_tag }}<br>
-          {{ field }}<br>
-          {{ field.errors }}
-        </div>
-      {% endfor %}
 
-      <button type="submit" class="btn-primary w-full">{% trans "Crear cuenta y mi tienda" %}</button>
+      <!-- GRID PRINCIPAL COMO affiliate_apply -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        {% for field in form %}
+          <div>
+            {{ field.label_tag }}
+
+            {% if field.name == "password1" %}
+              {{ field|add_class:"input-primary w-full"|add_placeholder:_("Crear contraseña") }}
+            {% elif field.name == "password2" %}
+              {{ field|add_class:"input-primary w-full"|add_placeholder:_("Confirmar contraseña") }}
+            {% elif field.name == "store_name" %}
+              {{ field|add_class:"input-primary w-full"|add_placeholder:_("Nombre de tu tienda") }}
+            {% elif field.name == "owner_name" %}
+              {{ field|add_class:"input-primary w-full"|add_placeholder:_("Tu nombre completo") }}
+            {% else %}
+              {{ field|add_class:"input-primary w-full" }}
+            {% endif %}
+
+            {{ field.errors }}
+          </div>
+        {% endfor %}
+
+      </div>
+
+      <button type="submit" class="btn-primary w-full">
+        {% trans "Crear cuenta y mi tienda" %}
+      </button>
+
     </form>
+
   </div>
 </div>
 {% endblock %}
