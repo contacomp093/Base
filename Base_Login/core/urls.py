@@ -9,9 +9,6 @@ from accounts.views import email_diagnostic
 urlpatterns = [
     # Necesario para cambiar idioma vía URL o cookies
     path('i18n/', include('django.conf.urls.i18n')),
-
-    # Ruta técnica para pruebas de email (SIN idioma)
-    path("diagnostic/email/", email_diagnostic),
 ]
 
 # Rutas traducibles
