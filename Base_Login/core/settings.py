@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'accounts',
+    'accounts.apps.AccountsConfig',
     'dashboard',
+    
 ]
 
 
@@ -179,3 +179,5 @@ DEFAULT_DOMAIN = os.getenv(
     "DEFAULT_DOMAIN",
     "http://127.0.0.1:8000" if DEBUG else "https://base-40xl.onrender.com"
 )
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

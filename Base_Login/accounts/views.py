@@ -1,51 +1,55 @@
-# accounts/views.py (importar lo necesario)
+# accounts/views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
-from django.template.loader import render_to_string
-from django.utils import timezone
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login
+from django.urls import reverse
+from django.conf import settings
+
 from django.contrib.auth.models import User
-from django.core.mail import EmailMultiAlternatives
-from threading import Thread
-from django.http import JsonResponse
-from django.core.mail import send_mail
 
-from .forms import ProviderApplicationForm
-from .models import ProviderApplication
+from .models import ProviderApplication, UserProfile
+from .forms import ProviderApplicationForm, ProviderRegistrationForm
 
-import uuid
 
-# 1) Formulario público de solicitud
+# ===========================================================
+# 1. FORMULARIO DE SOLICITUD (affiliate_apply)
+# ===========================================================
 def affiliate_apply(request):
     if request.method == "POST":
         form = ProviderApplicationForm(request.POST)
         if form.is_valid():
-            application = form.save(commit=False)
-            application.save()
+            application = form.save()
 
-            # Preparar URL de registro (token)
             token = application.token
             register_path = reverse("accounts:provider_register", args=[str(token)])
             register_url = f"{settings.DEFAULT_DOMAIN}{register_path}"
 
-            # Enviar email premium al solicitante (HTML) y copia a admin de pruebas
+            # Enviar email (ya lo tienes implementado)
+            from .views import send_provider_application_emails
             send_provider_application_emails(application, register_url)
 
             return redirect("accounts:affiliate_thanks")
+
     else:
         form = ProviderApplicationForm()
+
     return render(request, "accounts/affiliate_apply.html", {"form": form})
 
-# 2) Página de gracias (simple)
+
 def affiliate_thanks(request):
     return render(request, "accounts/affiliate_thanks.html")
 
-# Helper para enviar emails
-def send_provider_application_emails(application: ProviderApplication, register_url: str):
+# ===========================================================
+# HELPER PARA ENVIAR EMAILS DE AFILIACIÓN
+# ===========================================================
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from threading import Thread
+
+def send_provider_application_emails(application, register_url):
     """
-    Envía el correo en un hilo aparte para evitar bloqueos en Render.
+    Envía el correo premium al usuario que hizo la solicitud para completar
+    el registro del proveedor. Se envía en un hilo separado para evitar bloqueos.
     """
 
     def _send():
@@ -53,16 +57,17 @@ def send_provider_application_emails(application: ProviderApplication, register_
         from_email = settings.DEFAULT_FROM_EMAIL
         to_email = [application.contact_email]
 
-        # copia a pruebas
+        # Copia para pruebas
         cc = ["contacomp093@gmail.com"]
 
-        # HTML para el proveedor (premium)
+        # Render HTML
         html_content = render_to_string("accounts/emails/provider_application_email.html", {
             "application": application,
             "register_url": register_url,
             "company_name": getattr(settings, "PROJECT_NAME", "Mi Plataforma"),
         })
 
+        # Render versión texto
         text_content = render_to_string("accounts/emails/provider_application_email.txt", {
             "application": application,
             "register_url": register_url,
@@ -73,58 +78,52 @@ def send_provider_application_emails(application: ProviderApplication, register_
         msg.attach_alternative(html_content, "text/html")
         msg.send(fail_silently=False)
 
-    # Ejecutar envío sin bloquear la vista
     Thread(target=_send).start()
 
-# 3) Registro real del proveedor (token links)
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-
-class ProviderRegistrationForm(UserCreationForm):
-    # campos para la tienda
-    store_name = forms.CharField(required=True, widget=forms.TextInput(attrs={"class":"input-field"}))
-    store_address = forms.CharField(required=False, widget=forms.TextInput(attrs={"class":"input-field"}))
-    store_phone = forms.CharField(required=False, widget=forms.TextInput(attrs={"class":"input-field"}))
-    store_service_type = forms.CharField(required=False, widget=forms.TextInput(attrs={"class":"input-field"}))
-
-    class Meta:
-        model = User
-        fields = ("username", "email", "password1", "password2")
-
+# ===========================================================
+# 2. REGISTRO REAL DEL PROVEEDOR DESDE EL LINK DEL EMAIL
+# ===========================================================
 def provider_register(request, token):
-    # buscar la solicitud
+
+    # 1. Obtener la solicitud por token
     application = get_object_or_404(ProviderApplication, token=token)
 
-    # solo permitir si está pendiente o aprobado (pero no registrado)
+    # 2. Validar estado
     if application.status not in ("pending", "approved"):
-        messages.error(request, "Este link ya no es válido o ya fue usado.")
+        messages.error(request, "Este enlace ya fue usado o no es válido.")
         return redirect("accounts:affiliate_thanks")
 
+    # 3. PROCESAR FORMULARIO
     if request.method == "POST":
         form = ProviderRegistrationForm(request.POST)
+
         if form.is_valid():
+
+            # 4. Crear el usuario real (del sistema)
             user = form.save(commit=False)
             user.email = form.cleaned_data["email"]
             user.save()
 
-            # crear UserProfile con role='provider' (ajusta a tu modelo)
-            profile = UserProfile.objects.create(
-                user=user,
-                role="provider",
-                store_name=form.cleaned_data.get("store_name"),
-                store_address=form.cleaned_data.get("store_address"),
-                store_phone=form.cleaned_data.get("store_phone"),
-                store_service_type=form.cleaned_data.get("store_service_type"),
-            )
+            # 5. Completar el UserProfile
+            profile = user.userprofile
+            profile.role = "provider"
+            profile.store_name = form.cleaned_data["store_name"]
+            profile.store_address = form.cleaned_data["store_address"]
+            profile.store_phone = form.cleaned_data["store_phone"]
+            profile.store_service_type = form.cleaned_data["store_service_type"]
+            profile.save()
 
-            # marcar la aplicación como registrada
+            # 6. Marcar la solicitud como registrada
             application.mark_registered()
 
-            # opcional: iniciar sesión automáticamente
+            # 7. Login automático
             login(request, user)
 
+            # 8. Redirigir al dashboard
             messages.success(request, "Cuenta de proveedor creada correctamente.")
-            return redirect("dashboard:index")  # ajusta al nombre de tu dashboard
+            return redirect("dashboard:index")
+
+    # 9. Mostrar formulario (GET)
     else:
         form = ProviderRegistrationForm(initial={
             "email": application.contact_email,
@@ -135,4 +134,3 @@ def provider_register(request, token):
         "form": form,
         "application": application,
     })
-

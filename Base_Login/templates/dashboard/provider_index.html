@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block title %}Dashboard Proveedor{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto p-6 fade-in">
+
+    <h2 class="text-3xl font-bold mb-2">
+        {% trans "Bienvenido al Dashboard" %} 🎉
+    </h2>
+
+    <p class="text-sm text-purple-500 font-semibold mb-6">
+        {% trans "Rol actual:" %} <span class="font-bold">Proveedor</span>
+    </p>
+
+    {% include "dashboard/_dashboard_content.html" %}
+</div>
+{% endblock %}

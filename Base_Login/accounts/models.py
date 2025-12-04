@@ -64,3 +64,28 @@ class ProviderApplication(models.Model):
         self.registered_at = timezone.now()
         self.save()
 
+from django.contrib.auth.models import User
+
+class UserProfile(models.Model):
+    ROLE_CHOICES = [
+        ('client', 'Cliente'),
+        ('provider', 'Proveedor'),
+    ]
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+
+    # Datos del proveedor
+    store_name = models.CharField(max_length=150, blank=True)
+    store_address = models.CharField(max_length=255, blank=True)
+    store_phone = models.CharField(max_length=50, blank=True)
+    store_service_type = models.CharField(max_length=255, blank=True)
+
+    # Datos del cliente (futuros)
+    phone = models.CharField(max_length=50, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} ({self.role})"
