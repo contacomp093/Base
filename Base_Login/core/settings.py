@@ -1,11 +1,12 @@
 """
 Django settings for core project.
 """
-
+import dj_database_url
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
+
 
 # --------------------------------------------
 # CARGAR VARIABLES DESDE .env
@@ -25,7 +26,11 @@ SECRET_KEY = os.getenv("SECRET_KEY", "dev-key-no-usar-en-produccion")
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "base-40xl.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # --------------------------------------------
@@ -97,14 +102,9 @@ TEMPLATES = [
 # --------------------------------------------
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sitara_db',
-        'USER': 'sitara_user',
-        'PASSWORD': 'Metallica123!"#',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv("DATABASE_URL")
+    )
 }
 
 
