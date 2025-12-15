@@ -98,10 +98,15 @@ TEMPLATES = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sitara_db',
+        'USER': 'sitara_user',
+        'PASSWORD': 'Metallica123!"#',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 
 
 # --------------------------------------------
@@ -181,3 +186,5 @@ DEFAULT_DOMAIN = os.getenv(
 )
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
