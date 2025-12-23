@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-19 18:09-0600\n"
+"POT-Creation-Date: 2025-12-22 21:31-0600\n"
 "PO-Revision-Date: 2025-11-19 22:00-0600\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: English <LL@li.org>\n"
@@ -17,41 +17,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\accounts\forms.py:19
+#: .\accounts\forms.py:24
 #, fuzzy
 #| msgid "Tu nombre completo"
 msgid "Nombre completo"
 msgstr "Your full name"
 
-#: .\accounts\forms.py:20
+#: .\accounts\forms.py:25
 #, fuzzy
 #| msgid "Número telefónico"
 msgid "Correo electrónico"
 msgstr "Phone number"
 
-#: .\accounts\forms.py:21
+#: .\accounts\forms.py:26
 msgid "Teléfono"
 msgstr ""
 
-#: .\accounts\forms.py:22
+#: .\accounts\forms.py:27
 msgid "Ciudad"
 msgstr ""
 
-#: .\accounts\forms.py:23
+#: .\accounts\forms.py:28
 #, fuzzy
 #| msgid "Nombre de tu tienda o negocio"
 msgid "Nombre de la tienda"
 msgstr "Name of your store or business"
 
-#: .\accounts\forms.py:24
+#: .\accounts\forms.py:29
 msgid "Mensaje (opcional)"
 msgstr ""
 
-#: .\core\settings.py:118
+#: .\accounts\models.py:77
+msgid "Barbería"
+msgstr ""
+
+#: .\accounts\models.py:78
+msgid "Salón de belleza"
+msgstr ""
+
+#: .\accounts\models.py:79
+msgid "Uñas"
+msgstr ""
+
+#: .\accounts\models.py:80
+msgid "Spa"
+msgstr ""
+
+#: .\accounts\models.py:81
+msgid "Masajes"
+msgstr ""
+
+#: .\accounts\models.py:82
+msgid "Clínica"
+msgstr ""
+
+#: .\accounts\models.py:83
+msgid "Entrenador personal"
+msgstr ""
+
+#: .\core\settings.py:134
 msgid "Español"
 msgstr "Spanish"
 
-#: .\core\settings.py:119
+#: .\core\settings.py:135
 msgid "English"
 msgstr "English"
 
@@ -72,6 +100,7 @@ msgstr ""
 "account."
 
 #: .\templates\accounts\affiliate_apply.html:20
+#: .\templates\accounts\provider_register.html:37
 msgid "Tu nombre completo"
 msgstr "Your full name"
 
@@ -90,10 +119,6 @@ msgstr "City or region"
 #: .\templates\accounts\affiliate_apply.html:44
 msgid "Nombre de tu tienda o negocio"
 msgstr "Name of your store or business"
-
-#: .\templates\accounts\affiliate_apply.html:49
-msgid "Describe brevemente tu negocio y los servicios que ofreces"
-msgstr "Briefly describe your business and the services you offer"
 
 #: .\templates\accounts\affiliate_apply.html:52
 msgid "Enviar solicitud"
@@ -117,19 +142,37 @@ msgstr ""
 msgid "Volver al inicio"
 msgstr ""
 
-#: .\templates\accounts\provider_register.html:4
+#: .\templates\accounts\provider_register.html:5
 msgid "Registro de Proveedor"
 msgstr ""
 
-#: .\templates\accounts\provider_register.html:9
+#: .\templates\accounts\provider_register.html:12
 msgid "Completa el registro de tu tienda"
 msgstr ""
 
-#: .\templates\accounts\provider_register.html:10
+#: .\templates\accounts\provider_register.html:16
 msgid "Registramos una solicitud a nombre de:"
 msgstr ""
 
-#: .\templates\accounts\provider_register.html:22
+#: .\templates\accounts\provider_register.html:31
+#, fuzzy
+#| msgid "Contraseña"
+msgid "Crear contraseña"
+msgstr "Password"
+
+#: .\templates\accounts\provider_register.html:33
+#, fuzzy
+#| msgid "Contraseña"
+msgid "Confirmar contraseña"
+msgstr "Password"
+
+#: .\templates\accounts\provider_register.html:35
+#, fuzzy
+#| msgid "Nombre de tu tienda o negocio"
+msgid "Nombre de tu tienda"
+msgstr "Name of your store or business"
+
+#: .\templates\accounts\provider_register.html:49
 msgid "Crear cuenta y mi tienda"
 msgstr ""
 
@@ -139,6 +182,7 @@ msgid "Dashboard"
 msgstr ""
 
 #: .\templates\base\navbar.html:16 .\templates\base\sidebar.html:23
+#: .\templates\dashboard\_dashboard_content.html:5
 #: .\templates\dashboard\index.html:12
 #, fuzzy
 #| msgid "Usuario"
@@ -175,30 +219,42 @@ msgstr ""
 msgid "Configuración"
 msgstr ""
 
+#: .\templates\dashboard\_dashboard_content.html:6
+#: .\templates\dashboard\index.html:13
+msgid "Total registrados:"
+msgstr ""
+
+#: .\templates\dashboard\_dashboard_content.html:10
+#: .\templates\dashboard\index.html:17
+msgid "Sesiones activas"
+msgstr ""
+
+#: .\templates\dashboard\_dashboard_content.html:11
+#: .\templates\dashboard\index.html:18
+msgid "Hoy:"
+msgstr ""
+
+#: .\templates\dashboard\_dashboard_content.html:15
+#: .\templates\dashboard\index.html:22
+msgid "Notificaciones"
+msgstr ""
+
+#: .\templates\dashboard\_dashboard_content.html:16
+#: .\templates\dashboard\index.html:23
+msgid "Nuevas:"
+msgstr ""
+
+#: .\templates\dashboard\client_index.html:10
 #: .\templates\dashboard\index.html:8
+#: .\templates\dashboard\provider_index.html:10
 #, fuzzy
 #| msgid "Bienvenido de nuevo"
 msgid "Bienvenido al Dashboard"
 msgstr "Welcome back"
 
-#: .\templates\dashboard\index.html:13
-msgid "Total registrados:"
-msgstr ""
-
-#: .\templates\dashboard\index.html:17
-msgid "Sesiones activas"
-msgstr ""
-
-#: .\templates\dashboard\index.html:18
-msgid "Hoy:"
-msgstr ""
-
-#: .\templates\dashboard\index.html:22
-msgid "Notificaciones"
-msgstr ""
-
-#: .\templates\dashboard\index.html:23
-msgid "Nuevas:"
+#: .\templates\dashboard\client_index.html:14
+#: .\templates\dashboard\provider_index.html:14
+msgid "Rol actual:"
 msgstr ""
 
 #: .\templates\registration\login.html:4 .\templates\registration\login.html:37
@@ -224,6 +280,9 @@ msgstr "Password"
 #: .\templates\registration\login.html:44
 msgid "¿Olvidaste tu contraseña?"
 msgstr "Forgot your password?"
+
+#~ msgid "Describe brevemente tu negocio y los servicios que ofreces"
+#~ msgstr "Briefly describe your business and the services you offer"
 
 #~ msgid "Cambiar tema"
 #~ msgstr "Toggle theme"

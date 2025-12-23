@@ -35,6 +35,8 @@
               {{ field|add_class:"input-primary w-full"|add_placeholder:_("Nombre de tu tienda") }}
             {% elif field.name == "owner_name" %}
               {{ field|add_class:"input-primary w-full"|add_placeholder:_("Tu nombre completo") }}
+            {% elif field.name == "store_service_type" %}
+              {{ field|add_class:"input-primary w-full" }}
             {% else %}
               {{ field|add_class:"input-primary w-full" }}
             {% endif %}

@@ -2,6 +2,7 @@ import uuid
 from datetime import timedelta
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 class ProviderApplication(models.Model):
@@ -71,6 +72,16 @@ class UserProfile(models.Model):
         ('client', 'Cliente'),
         ('provider', 'Proveedor'),
     ]
+    
+    SERVICE_TYPE_CHOICES = [
+        ('barber', _('Barbería')),
+        ('beauty_salon', _('Salón de belleza')),
+        ('nails', _('Uñas')),
+        ('spa', _('Spa')),
+        ('massage', _('Masajes')),
+        ('clinic', _('Clínica')),
+        ('personal_trainer', _('Entrenador personal')),
+    ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
@@ -79,7 +90,11 @@ class UserProfile(models.Model):
     store_name = models.CharField(max_length=150, blank=True)
     store_address = models.CharField(max_length=255, blank=True)
     store_phone = models.CharField(max_length=50, blank=True)
-    store_service_type = models.CharField(max_length=255, blank=True)
+    store_service_type = models.CharField(
+        max_length=30,
+        choices=SERVICE_TYPE_CHOICES,
+        blank=True
+    )
 
     # Datos del cliente (futuros)
     phone = models.CharField(max_length=50, blank=True)
