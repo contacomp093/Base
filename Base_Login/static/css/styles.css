@@ -1,1 +1,37 @@
-@import "tailwindcss";
+/* =========================
+   TAILWIND CORE
+========================= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   CUSTOM BASE
+========================= */
+@import "./custom/base.css";
+
+/* =========================
+   LAYOUT (containers, grids)
+========================= */
+@import "./custom/layout.css";
+
+/* =========================
+   FORM ELEMENTS
+========================= */
+@import "./input.css";
+
+/* =========================
+   COMPONENTS
+   (buttons, select, cards)
+========================= */
+@import "./custom/components.css";
+
+/* =========================
+   ANIMATIONS
+========================= */
+@import "./custom/animations.css";
+
+/* =========================
+   THEMES (dark/light)
+========================= */
+@import "./custom/themes.css";

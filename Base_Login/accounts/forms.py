@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import ProviderApplication
+from .models import UserProfile
 
 
 # ========================================================
@@ -62,10 +63,11 @@ class ProviderRegistrationForm(UserCreationForm):
         widget=forms.TextInput(attrs={"class": "input-primary w-full"})
     )
 
-    store_service_type = forms.CharField(
+    store_service_type = forms.ChoiceField(
         required=False,
         label="Tipo de servicio",
-        widget=forms.TextInput(attrs={"class": "input-primary w-full"})
+        choices=UserProfile.SERVICE_TYPE_CHOICES,
+        widget=forms.Select(attrs={"class": "select-primary"})
     )
 
     class Meta:

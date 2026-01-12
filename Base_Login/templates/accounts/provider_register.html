@@ -1,10 +1,12 @@
 {% extends "base_public/public_base.html" %}
+
 {% load i18n %}
 {% load form_filters %}
 
 {% block title %}{% trans "Registro de Proveedor" %}{% endblock %}
 
 {% block content %}
+
 <div class="public-bg h-screen flex items-center justify-center p-4 fade-in">
   <div class="w-full max-w-2xl card-translucent rounded-2xl shadow-2xl p-8">
 
@@ -36,7 +38,7 @@
             {% elif field.name == "owner_name" %}
               {{ field|add_class:"input-primary w-full"|add_placeholder:_("Tu nombre completo") }}
             {% elif field.name == "store_service_type" %}
-              {{ field|add_class:"input-primary w-full" }}
+              {{ field|add_class:"select-primary" }}
             {% else %}
               {{ field|add_class:"input-primary w-full" }}
             {% endif %}
